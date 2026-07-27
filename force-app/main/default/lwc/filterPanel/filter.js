@@ -272,8 +272,11 @@ export class Filter {
             else 
                 return this.hasValidValue;
         }
-        else
-            return !this.hasInitValue && this.hasValidValue;
+        else {
+            const initHadValue = !this.isEqualToInitValue(this.getEmptyValue());
+            const clearedInitValue = initHadValue && this.hasNoValue;
+            return !this.hasInitValue && (this.hasValidValue || clearedInitValue);
+        }
     }
 
     get canCancel() {
