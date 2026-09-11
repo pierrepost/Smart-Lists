@@ -112,10 +112,18 @@ export default class ExportToCsvModal extends LightningElement {
                 }
                 const fileName = this.listName + Date.now() + '.csv';
                 const link = this.template.querySelector('.sl-link');
-                const url = 'data:text/csv;charset=utf-8,\uFEFF' + encodeURIComponent(csvFile);
+                /*const url = 'data:text/csv;charset=utf-8,\uFEFF' + encodeURIComponent(csvFile);
                 link.setAttribute('href', url);
                 link.setAttribute('download', fileName);
+                link.click();*/
+                const blob = new Blob(['\uFEFF', csvFile]);
+                const url = URL.createObjectURL(blob);
+                link.href = url;
+                link.download = fileName;
                 link.click();
+                setTimeout(() => {
+                    URL.revokeObjectURL(url);
+                }, 0);                
                 this.exporting = false;
                 this.notifyParent('cancel');
             })
