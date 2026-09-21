@@ -32,3 +32,8 @@
 .sl-checkbox {
     background-color: transparent !important;
 }
+.sl-rich-text {
+    white-space: pre-wrap;       /* Preserves whitespace and wraps lines */
+    word-break: break-word;      /* Breaks long words/URLs to fit the container */
+    overflow-wrap: break-word;   /* Modern standard for word wrapping */
+}
